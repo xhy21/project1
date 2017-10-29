@@ -3,24 +3,186 @@
       <div class="index-left">
         <div class="index-left-block">
            <h2>全部产品</h2>
-           <h3>PC产品</h3>
-           <ul>
-                <li>测试数据</li>
-           </ul>
-           <h3>应用产品</h3>
-           <ul>
-                <li>测试数据</li>
-           </ul>
+           <template v-for="product in productList">
+             <h3>{{ product.title }}</h3>
+             <ul>
+                  <li v-for="item in product.list">
+                    <a :href="item.url">{{ item.title }}</a>
+                  </li>
+             </ul>
+             <div v-if="!product.last" class="hr"></div>
+           </template>
         </div>
         <div class="index-left-block lastest-news">
-            <h2>最新消息</h2> 
+            <h2>最新消息</h2>
+            <ul>
+              <li v-for="item in newsList">
+                <a :href="item.url">{{ item.title }}</a>
+              </li>
+            </ul>
+        </div>
+      </div>
+      <div class="index-right">
+         <slideShow :slides="slides" :inv="invTime"></slideShow>
+        <div class="index-board-list">
+          <div
+            class="index-board-item"
+            v-for=" (item,index) in boardList"
+            :class="[{ 'line-last' : index % 2 !== 0},'index-board-'  +   item.id]">
+            <div class="index-board-item-inner">
+              <h2> {{ item.title }} </h2>
+              <p>{{ item.description }}</p>
+              <div class="index-board-button">
+                <a href="#" class="button">立即购买</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </template>
-  
-  
-  
+  <script>
+  import slideShow from '../components/sliderShow'
+    export default{
+      components:{
+     slideShow
+    },
+      data(){
+        return{
+          invTime:2000,
+         slides:[
+           {
+             src:require('../assets/slideShow/pic1.jpg'),
+             title:'React.js入门与实战',
+             href:'detail/analysis'
+           },
+           {
+             src:require('../assets/slideShow/pic2.jpg'),
+             title:'成为高级安卓工程师',
+             href:'detail/analysis'
+           },
+           {
+             src:require('../assets/slideShow/pic3.jpg'),
+             title:'玩转算法与面试',
+             href:'detail/analysis'
+           },
+           {
+             src:require('../assets/slideShow/pic4.jpg'),
+             title:'Reactnative实战与开发',
+             href:'detail/analysis'
+           },
+         ],
+          boardList:[
+           {
+             title: '开放产品',
+             description: '开放产品是一款开放产品',
+             id:'car',
+             saleout:false
+           },
+           {
+             title: '品牌营销',
+             description: '品牌营销帮助你的产品更好地找到定位',
+             id:'earth',
+             saleout:false
+           },
+           {
+               title: '使命必达',
+               description: '使命必达快速迭代永远保持最前端的速度',
+               id:'loud',
+               saleout:true
+           },
+           {
+                 title: '勇攀高峰',
+                 description: '帮你勇闯高峰，到达事业的顶峰',
+                 id:'hill',
+                 saleout:false
+           },
+         ],
+          newsList:[
+           {
+             title: '最新消息',
+             url: 'http://www.apple.com.cn'
+           },
+           {
+             title: '最新消息',
+             url: 'http://www.apple.com.cn'
+           },
+           {
+               title: '最新消息',
+               url: 'http://www.apple.com.cn'
+           },
+           {
+                 title: '最新消息',
+                 url: 'http://www.apple.com.cn'
+           },
+           {
+             title: '最新消息',
+             url: 'http://www.apple.com.cn'
+           },
+           {
+             title: '最新消息',
+             url: 'http://www.apple.com.cn'
+           },
+           {
+               title: '最新消息',
+               url: 'http://www.apple.com.cn'
+           },
+           {
+                 title: '最新消息',
+                 url: 'http://www.apple.com.cn'
+           },
+         ],
+          productList:{
+            pc:{
+              title: 'PC产品',
+              list:[
+                {
+                  title: '哔哩哔哩',
+                  url: 'http://www.bilibili.com'
+                },
+                {
+                  title: '百度',
+                  url: 'http://www.baidu.com'
+                },
+                {
+                    title: '网易',
+                    url: 'http://www.163.com'
+                },
+                {
+                      title: '优酷',
+                      url: 'http://www.youku.com'
+                },
+              ]
+            },
+            app:{
+              title:'手机应用类',
+              last:true,
+              list:[
+                {
+                  title: '360安全卫士',
+                  url: 'https://www.360.cn'
+                },
+                {
+                  title: '智能地图',
+                  url: 'http://map.baidu.com'
+                },
+                {
+                  title: '支付宝',
+                  url: 'https://www.alipay.com'
+                },
+                {
+                  title: '产品助手',
+                  url: 'http://www.apple.com.cn'
+                },
+              ]
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+
   <style scoped>
   .index-wrap {
     width: 1200px;
