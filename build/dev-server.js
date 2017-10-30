@@ -61,8 +61,36 @@ app.use(require('connect-history-api-fallback')())
 
 // serve webpack bundle output
 app.use(devMiddleware)
+var apiserver = express()
+var bodyParser = require('body-parser')
+apiserver.use(bodyParser.urlencoded({extended:true}))
+apiserver.use(bodyParser.json())
+var apiRouter = express.Router()
+var fs = require('fs')
+apiRouter.route('/:apiName')
+.all(function (req,res){
+  fs.readFile('./db.json','utf-8',function(err,data){
+    if(err) throw err
+    var data = JSON.parse(data)
+    if(data[req.params.apiName]){
+      res.json(data[req.params.apiName])
+    }
+    else {
+      res.send('no such api name')
+    }
+  })
+ })
+ apiserver.use('/api',apiRouter);
+  apiserver.listen(port + 1,function(err){
+    if(err){
+      console.log(err)
+      return
+    }
+    console.log('Listening at http://localhost:'+(port +1)+'\n');
+  }) 
 
 // serve pure static assets
+
 const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 

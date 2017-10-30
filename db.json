@@ -1,0 +1,29 @@
+{
+    "getNewsList":[
+      {
+        "id": 1,
+        "title": "最新消息1",
+        "url": "http://news.163.com"
+      },
+      {
+        "id": 2,
+        "title": "最新消息2",
+        "url": "http://news.163.com"
+      },
+      {
+        "id": 3,
+        "title": "最新消息3",
+        "url": "http://news.163.com"
+      },
+      {
+        "id": 4,
+        "title": "最新消息4",
+        "url": "http://news.163.com"
+      }
+      {
+        "id": 5,
+        "title": "最新消息5",
+        "url": "http://news.163.com"
+      }
+    ]
+  }

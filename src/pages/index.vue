@@ -44,6 +44,15 @@
   <script>
   import slideShow from '../components/sliderShow'
     export default{
+      created:function(){
+        this.$http.get('api/getNewsList')
+            .then((res) => {
+              this.newsList = res.data
+              console.log(res.data)
+             },(err) => {
+        console.log(err);
+       })
+    },
       components:{
      slideShow
     },
@@ -99,38 +108,7 @@
            },
          ],
           newsList:[
-           {
-             title: '最新消息',
-             url: 'http://www.apple.com.cn'
-           },
-           {
-             title: '最新消息',
-             url: 'http://www.apple.com.cn'
-           },
-           {
-               title: '最新消息',
-               url: 'http://www.apple.com.cn'
-           },
-           {
-                 title: '最新消息',
-                 url: 'http://www.apple.com.cn'
-           },
-           {
-             title: '最新消息',
-             url: 'http://www.apple.com.cn'
-           },
-           {
-             title: '最新消息',
-             url: 'http://www.apple.com.cn'
-           },
-           {
-               title: '最新消息',
-               url: 'http://www.apple.com.cn'
-           },
-           {
-                 title: '最新消息',
-                 url: 'http://www.apple.com.cn'
-           },
+          
          ],
           productList:{
             pc:{
