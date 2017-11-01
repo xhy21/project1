@@ -6,66 +6,64 @@
                <div class="head-nav">
                  <ul class="nav-list">
                      <li>登录</li>
-                     <li class="nav-pile">|</li>
-                     <li>注册</li>
-                     <li class="nav-pile">|</li>
-                      <li @click="aboutClick">关于</li>
-                 </ul>
-               </div>
-           </div>
-       </div>
-       <div class="app-content">
-         <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
-       </div>
-       <div class="app-foot">
-         <p>@ 2017 大连东软信息学院</P>
-       </div>
-       <mydialog :isShow="isShowAboutDialog"
-                  @on-close="closeDialog('isShowAboutDialog')">
-                  <p>这是我的第一个vue项目，商城演示</p>
-        </mydialog>
-        <mydialog :isShow="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
+                      <li class="nav-pile">|</li>
+                      <li>注册</li>
+                      <li class="nav-pile">|</li>
 
-        </mydialog>
-        <mydialog :isShow="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
+                       <li @click="aboutClick">关于</li>
+                  </ul>
+                </div>
+            </div>
+        </div>
+        <div class="app-content">
 
-        </mydialog>
-    </div>
-  </template>
+          <keep-alive>
+           <router-view></router-view>
+         </keep-alive>
+        </div>
+        <div class="app-foot">
+          <p>@ 2017 大连东软信息学院</P>
+        </div>
+        <mydialog :isShow="isShowAboutDialog"
+                 @on-close="closeDialog('isShowAboutDialog')">
+                 <p>1</p>
+       </mydialog>
+       <mydialog :isShow="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
 
-  <script>
-   import mydialog from './base/dialog'
-  export default {
-    components:{
-            mydialog
-        },
-        data(){
-          return{
-      isShowAboutDialog:false,
-      isShowLogDialog:false,
+       </mydialog>
+       <mydialog :isShow="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
+
+       </mydialog>
+     </div>
+   </template>
+
+   <script>
+    import mydialog from './base/dialog'
+   export default {
+     components:{
+             mydialog
+         },
+         data(){
+           return{
+             isShowAboutDialog:false,
+       isShowLogDialog:false,
       isShowRegDialog:false
-          }
-        },
-        methods:{
-          aboutClick(){
-            this.isShowAboutDialog = true
-          },
-          logClick(){
-         this.isShowLogDialog = true
-       },
-       regClick(){
-         this.isShowRegDialog = true
-       },
-   closeDialog(attr){
-     this[attr] = false
-          }
-        },
-
-    name: 'app'
-  }
-  </script>
+           }
+         },
+         methods:{
+           aboutClick(){
+             this.isShowAboutDialog = true
+           }
+         },
+         logClick(){
+              this.isShowLogDialog = true
+             },
+             regClick(){
+              this.isShowRegDialog = true
+            },
+     name: 'app'
+   }
+   </script>
 
   <style>
   html, body, div, span, applet, object, iframe,
@@ -136,13 +134,13 @@
     float: left;
   }
   .app-head-inner img {
-    width: 50px;
-    margin-top: 20px;
-  }
+     width: 50px;
+     margin-top: 20px;
+   }
 
-  .head-nav {
-    float: right;
-  }
+   .head-nav {
+     float: right;
+   }
   .head-nav ul {
     overflow: hidden;
   }

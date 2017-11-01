@@ -59,8 +59,20 @@ Object.keys(proxyTable).forEach(function (context) {
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
 
-// serve webpack bundle output
-app.use(devMiddleware)
+ // serve webpack bundle output
+ app.use(devMiddleware)
+//使用jsonserver模拟服务器的方法
+// var jsonServr = require('json-server')
+// var apiserver = jsonServr.create()
+// var apirouter = jsonServr.router('db.json')
+// var middlewares = jsonServr.defaults()
+//
+// apiserver.use(middlewares)
+// apiserver.use('/api',apirouter)
+// apiserver.listen(port + 1, function(){
+//     console.log('JSON Server is runing')
+// })
+//使用express模拟服务器的方法
 var apiserver = express()
 var bodyParser = require('body-parser')
 apiserver.use(bodyParser.urlencoded({extended:true}))
@@ -74,25 +86,24 @@ apiRouter.route('/:apiName')
     var data = JSON.parse(data)
     if(data[req.params.apiName]){
       res.json(data[req.params.apiName])
-    }
+   }
     else {
       res.send('no such api name')
     }
   })
  })
- apiserver.use('/api',apiRouter);
-  apiserver.listen(port + 1,function(err){
-    if(err){
-      console.log(err)
-      return
-    }
-    console.log('Listening at http://localhost:'+(port +1)+'\n');
-  }) 
 
-// serve pure static assets
-
-const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
-app.use(staticPath, express.static('./static'))
+apiserver.use('/api',apiRouter);
+apiserver.listen(port + 1,function(err){
+  if(err){
+    console.log(err)
+    return
+ }
+  console.log('Listening at http://localhost:'+(port +1)+'\n');
+})
+ // serve pure static assets
+ const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
+ app.use(staticPath, express.static('./static'))
 
 const uri = 'http://localhost:' + port
 
